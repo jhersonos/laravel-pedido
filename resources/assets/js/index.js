@@ -6,7 +6,7 @@ $( document ).ready(function() {
 			client_id:1,
 			deliveryAmount:5,
 			orderAmount:25,
-			totalAmount:4,
+			totalAmount:30,
 			address:"tupac",
 			references:"mercado",
 			rider:'2',
@@ -33,4 +33,10 @@ $( document ).ready(function() {
           })
           .modal('show')
         ; });
+
+    $("#delivery").keyup(function(){
+    	var delivery = parseFloat($('#delivery').val());
+    	var total = parseFloat($('#total').val());
+    	$('#mcobrar').val(delivery+total);
+    });
 });

@@ -5,15 +5,16 @@ app.controller("pedidoCtrl", function($scope,$http) {
 	$scope.locales=[];
 	$scope.productos=[];
 	$scope.listap=[];
-	
 	$scope.getRestaurantes = {
 		company:function(){
+			// $('#pedido')[0].reset();
 			var url = "http://localhost/laravel/public/restaurant";
 			$http({
 			  method: 'GET',
 			  url: url
 			}).then(function successCallback(response) {
 			    // console.log(response.data)
+			    // $('#')
 			    $scope.restaurantes = response.data;
 			    $("#restaurant-list").removeAttr('disabled')
 			  }, function errorCallback(response) {
@@ -22,7 +23,7 @@ app.controller("pedidoCtrl", function($scope,$http) {
 		},local:function(){//get list of locales
 				$scope.locales=[];
 				var d = $scope.selectedItem
-				var c = $('#restaurant-list').val();
+				var c = parseInt($('#restaurant-list').val());
 				var url = "http://localhost/laravel/public/headquarter?restaurant="+c;
 				$http({
 				  method: 'GET',
@@ -38,8 +39,8 @@ app.controller("pedidoCtrl", function($scope,$http) {
 		},producto:function(){//get list of products
 				$("#sav").attr("disabled",false);
 				// var companylist = $('#restaurant-list').val();
-				var locallist = $('#local-list').val();
-				if(locallist!="") {
+				var locallist = parseInt($('#local-list').val());
+				if (!isNaN(locallist)) {
 					var url = "http://localhost/laravel/public/product?headquarter="+locallist;
 					$http({
 					  method: 'GET',
@@ -62,8 +63,8 @@ app.controller("pedidoCtrl", function($scope,$http) {
 			var total = 0;			
 			$("input:checked").each(function(i, elem){
               var item = "#item"+this.id;//id for items list
-              $(item).removeClass('item none');//delete none
-              $(item).addClass('item show');//add show
+              $(item).removeClass('lnone');//delete none
+              // $(item).addClass('item show');//add show
               var element = "#prex"+this.id;//price id for bucle
               $(element).removeClass('pnone')
 			  $(element).addClass('pshow')

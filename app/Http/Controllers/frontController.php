@@ -13,7 +13,7 @@ class frontController extends Controller
     }
     public function order(Request $request){
     	$this -> validate($request,[
-    			'products'		=>	'required|unique:posts',
+    			'products'		=>	'required',
     			'headquarter' 	=> 	'required',
     			'client_id'		=>	'required',
     			'deliveryAmount'=>	'required',
@@ -23,7 +23,25 @@ class frontController extends Controller
     			'references'	=>	'required',
     			'rider'			=>	'required',
     			'orderComment'	=>	'',
-    			'discrict'		=>	'required'
+    			'district'		=>	'required'
     		]);
+    }
+    public function create(){
+        $order = new orders;
+
+        $order->products = Input::get('username');
+        $order->headquarter = Input::get('email');
+        $order->client_id = Hash::make(Input::get('password'));
+        $order->deliveryAmount = Input::get('email');
+        $order->orderAmount = Input::get('email');
+        $order->totalAmount = Input::get('email');
+        $order->address = Input::get('email');
+        $order->references = Input::get('email');
+        $order->rider = Input::get('email');
+        $order->orderComment = Input::get('email');
+        $order->district = Input::get('email');
+        $order->save();
+
+        return Redirect::back();
     }
 }

@@ -21,6 +21,7 @@
 
 /**********Ruta Index***********/
 Route::get('/','frontController@index');
+Route::get('/insert','frontController@order');
 Route::post('post','frontController@order');
 //get data restaurant 
 Route::get('restaurant','restaurantController@index');

@@ -9,17 +9,24 @@
   <script type="text/javascript" src="/laravel/public/js/controller.js"></script>
 	<script type="text/javascript" src="/laravel/resources/assets/js/index.js"></script>
 	<script src='//maps.googleapis.com/maps/api/js?key=AIzaSyB7yLRsbqezx-dLDB4kWQaiBGEH8YlRH8I'></script>
+	<script type="text/javascript" src="/laravel/public/js/map.js"></script>
 	<title>Pedidos</title>
 	<link rel="stylesheet" type="text/css" href="/laravel/public/css/semantic/semantic.min.css">
 	<link rel="stylesheet" type="text/css" href="/laravel/public/css/main.css">
 </head>
 <body ng-app="pedidoApp" ng-controller="pedidoCtrl">
 <div class="carta">
+<?php
+	{{
+		@section('content')
+		Form::open(array('url'=>'/insert','method'=>'post'))	
+	}}  
+?>	
 	<form id="pedido" class="ui form">
 		<div class="two fields">
 			<div class="field">
 				Restaurante: 
-				<select id="restaurant-list" ng-click="defaultlocal()" ng-model="itemSelect" ng-change="getRestaurantes.local()">
+				<select id="restaurant-list" ng-model="itemSelect" ng-change="getRestaurantes.local()">
 					<option value="">-- Seleccione restaruante --</option>
 					<option ng-repeat="rest in restaurantes" value="{{ rest.id }}" >{{	rest.name }}</option>
 				</select>
@@ -52,10 +59,12 @@
 						<textarea id="comentarios" placeholder="Comentarios extras sobre el pedido"></textarea>
 					</div>
 				</div>
+				<label>Destino</label>
+				<input type="text"></input>
 			</div>
 			<div class="field">
 				<div class="ui celled ordered list" id="list-product">
-					<div ng-repeat="lista in listap" class="item padd">
+					<div ng-repeat="lista in listap" class="item padd lnone" id="item{{ $index }}">
 						<div class="content">
 							<div class="header lstyle">
 								{{	lista.name }}
@@ -70,17 +79,17 @@
 					</div>
 				</div>
 				<label>Total</label>
-				<input type="text" id="total"></input>
+				<input type="text" id="total" value="0"></input>
 			</div>
 		</div>
 		<div class="two fields">
 			<div class="field">
-				<label>Destino</label>
+				<label>referencia</label>
 				<input type="text"></input>
 			</div>
 			<div class="field">
-				<label>referencia</label>
-				<input type="text"></input>
+				<label>Costo delivery</label>
+				<input type="text" id="delivery" value="0"></input>
 			</div>
 		</div>
 		<div class="two fields">
@@ -91,15 +100,16 @@
 				<label>Metodo de pago:</label>
 				<select id="tipo-pago">
 					<option>-- Seleccione metodo de pago --</option>
-					<option value="efectivo">Efectivo</option>
+					<option value="efectivo" selected>Efectivo</option>
 					<option value="visa">Visa</option>
 				</select>
 				<label>Monto a cobrar</label>
-				<input type="text"></input>
+				<input type="text" id="mcobrar" value="0"></input>
 				<button class="ui button btn-submit" ng-click="getRestaurantes.addProduct()">Realizar Pedido</button>
 			</div>
 		</div>
 	</form>
+	<?php {{Form::close()}}	@stop ?>
 </div>
 <!-- Pop up con los productos -->
 <div class="ui modal" id="pro">
@@ -119,7 +129,9 @@
 				</thead>
 				 	<tbody>
 						<tr ng-repeat="carta in productos">
-							<td><input type="checkbox" name="example" id="{{$index}}"/></td>
+							<td class="cent">
+								<input type="checkbox" name="example" id="{{$index}}"/>
+							</td>
 							<td>
 								<label>{{ carta.name }}</label>
 								<input type="hidden" id="n{{$index}}" value="{{ carta.name }}"></input>
@@ -136,8 +148,8 @@
     </div>
   </div>
   <div class="actions">
-    <div class="ui button">Cancelar pedido</div>
-    <div class="ui button" >Agregar a la Cola</div>
+    <div class="ui button" >Cancelar pedido</div>
+    <div class="ui button" ng-click="getRestaurantes.addProduct()">Agregar a la Cola</div>
   </div>
 </div>
 </body>

@@ -57,11 +57,17 @@ padding: 10px;
 	width: 100%;
     text-align: center;
 }
+.cent{
+	text-align: center !important;
+}
 .close{
 	cursor: pointer;	
 }
 .padd{
 	padding: 8px;
+}
+.lnone{
+	display: none !important;
 }
 #label-off{
 	color: silver !important;
