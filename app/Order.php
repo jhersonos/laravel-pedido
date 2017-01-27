@@ -9,7 +9,7 @@ class Order extends Model
     //
     protected $table = "orders";
 
-    protected $fillable = ['headquarter_id','rider_id'];
+    protected $fillable = ['products_id','client','deliveryAmount','orderAmount','totalAmount','address','references','headquarter','rider_id','orderComment','district'];
 
     public function headquarter(){
     	return $this->belongsTo('App/Headquarter');

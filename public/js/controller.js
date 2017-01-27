@@ -8,7 +8,7 @@ app.controller("pedidoCtrl", function($scope,$http) {
 	$scope.getRestaurantes = {
 		company:function(){
 			// $('#pedido')[0].reset();
-			var url = "http://localhost/laravel/public/restaurant";
+			var url = "/restaurant";
 			$http({
 			  method: 'GET',
 			  url: url
@@ -24,7 +24,7 @@ app.controller("pedidoCtrl", function($scope,$http) {
 				$scope.locales=[];
 				var d = $scope.selectedItem
 				var c = parseInt($('#restaurant-list').val());
-				var url = "http://localhost/laravel/public/headquarter?restaurant="+c;
+				var url = "/headquarter?restaurant="+c;
 				$http({
 				  method: 'GET',
 				  url: url
@@ -41,7 +41,7 @@ app.controller("pedidoCtrl", function($scope,$http) {
 				// var companylist = $('#restaurant-list').val();
 				var locallist = parseInt($('#local-list').val());
 				if (!isNaN(locallist)) {
-					var url = "http://localhost/laravel/public/product?headquarter="+locallist;
+					var url = "/product?headquarter="+locallist;
 					$http({
 					  method: 'GET',
 					  url: url
