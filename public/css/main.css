@@ -38,13 +38,21 @@ html,body{
 .carta #pedido{
 padding: 10px;
 }
-.pedido-box{
+.pedido-box#on{
 	width: 150px;
 	height: 150px;
 	border: 1px solid black;
 	border-radius: 5px;
 	position: relative;
 	cursor: pointer;
+}
+.pedido-box#off{
+	width: 150px;
+	height: 150px;
+	border: 1px solid silver;
+	border-radius: 5px;
+	position: relative;
+	cursor: auto;
 }
 .pedido-box .center-box{
 	position: absolute;
@@ -57,6 +65,19 @@ padding: 10px;
 	width: 100%;
     text-align: center;
 }
+
+.pedido-box#on .center-box .item-center{
+	width: 100%;
+    text-align: center;
+    color: black;
+}
+
+.pedido-box#off .center-box .item-center{
+	width: 100%;
+    text-align: center;
+    color: silver;
+}
+
 .cent{
 	text-align: center !important;
 }

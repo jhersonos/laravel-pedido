@@ -13,7 +13,7 @@ class productController extends Controller
     	//get parameter send to url
     	$headquarter_id = $request->query('headquarter');
 
-    	$product = DB::table('products')->select('name','size','price','description')->where('headquarter_id',$headquarter_id)->get();
+    	$product = DB::table('products')->select('id','name','size','price','description')->where('headquarter_id',$headquarter_id)->get();
 
     	return $product;
     }

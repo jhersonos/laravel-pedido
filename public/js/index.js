@@ -6,32 +6,46 @@ $( document ).ready(function() {
 	  console.log( index + ": " + $( this ).text() );
 	});
 
+   $('#enviar').on('click',function(){
+   		var arr = [];
+   		var headquarter = $('#local-list').val(),
+   			client 		= $("#nameClient").val(),
+   			delivery 	= $("#delivery").val(),
+   			oAmount 	= $("#total").val(),
+   			total 		= $("#mcobrar").val(),
+   			address 	= $("#destino").val(),
+   			reference 	= $("#referencia").val(),
+   			comment 	= $("#comentarios").val();
+   			district 	= $("#distrito").val(); 	
+   			// rider		= $("#rider").val
+	   	$("#list-product div.item:not(.lnone) .content .header input[type=hidden]").each(function(i, elem){
+	   		arr.push(this.value);
+	   	});
 
-   $('#enviar').on('submit',function(){
-   		a = {
-					"products":1,
-					"headquarter":2,
-					"client_id":1,
-					"deliveryAmount":5,
-					"orderAmount":25,
-					"totalAmount":30,
-					"address":"tupac",
-					"references":"mercado",
-					"rider":1,
-					"orderComment":"all",
-					"district":"delicias"
-		};
 		$.ajax({
-			url:'http://localhost/order',
+			url:'/order',
 			type:'POST',
-			data:a,
-			succes:function(data){
-				console.log(data)
-			},err:function(status,http){
-				console.log('status: '+status+' http'+http)
-			}
-		});
-   })
+			data:{
+					"products":arr,
+					"headquarter":headquarter,
+					"client_id":client,
+					"deliveryAmount":delivery,
+					"orderAmount":oAmount,
+					"totalAmount":total,
+					"address":address,
+					"references":reference,
+					"rider":1,
+					"orderComment":comment,
+					"district":district
+				}
+		}).done(function() {
+		    alert( "Pedido éxitoso" );
+		    $("#pedido")[0].reset();
+
+		  }).fail(function() {
+		    alert( "error" );
+		  });
+   		})
 
     $(".pedido-box").on('click',function(){
     	$('#pro')

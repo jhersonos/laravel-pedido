@@ -10,14 +10,7 @@
 | to using a Closure or controller method. Build something great!
 |
 */
-//Establecer rutas del navegador
-// Route::get('prueba',function(){
-// 	return "hola desde route.php";
-// });
-// //enviar parametro por url nombre / pepito
-// Route::get('nombre/{nombre}',function($nombre){
-// 	return "mi nombre es".$nombre;	
-// });
+
 
 /**********Ruta Index***********/
 Route::get('/','frontController@index');
@@ -33,15 +26,3 @@ Route::get('product','productController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-
-// example of test unity's laravel
-// if ( ! function_exists('welcome')) {
-//     function welcome()
-//     {
-//         if (auth()->check()) {
-// 	        return 'Welcome ' . auth()->user()->name . '!';
-// 	    }
-	 
-// 	    return 'Welcome guest!';
-//     }
-// }

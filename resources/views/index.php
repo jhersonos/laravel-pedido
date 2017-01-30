@@ -20,7 +20,7 @@
 		<div class="two fields">
 			<div class="field">
 				Restaurante: 
-				<select id="restaurant-list" ng-model="itemSelect" name="restaurat-list" ng-change="getRestaurantes.local()">
+				<select id="restaurant-list" disabled ng-model="itemSelect" name="restaurat-list" ng-change="getRestaurantes.local()">
 					<option value="">-- Seleccione restaruante --</option>
 					<option ng-repeat="rest in restaurantes" value="{{ rest.id }}" >{{	rest.name }}</option>
 				</select>
@@ -38,7 +38,7 @@
 			<div class="field">
 				<div class="fields">
 					<div class="five wide field">
-						<div class="pedido-box">
+						<div class="pedido-box" id="off">
 							<div class="center-box">
 								<div class="item-center icon">
 									<i class="huge add circle icon"></i>
@@ -53,7 +53,7 @@
 						<textarea id="comentarios" name="comentarios" placeholder="Comentarios extras sobre el pedido"></textarea>
 					</div>
 				</div>
-				<label>Destino</label>
+				<label>destino</label>
 				<input type="text" id="destino" name="destino"></input>
 			</div>
 			<div class="field">
@@ -62,6 +62,7 @@
 						<div class="content">
 							<div class="header lstyle">
 								{{	lista.name }}
+								<input type="hidden" id="pid{{	$index	}}"></input>
 							</div>
 							<div class="rf">
 								<strong class="close">X</strong>
@@ -78,28 +79,30 @@
 		</div>
 		<div class="two fields">
 			<div class="field">
-				<label>referencia</label>
-				<input type="text" name="referencia"></input>
+				<label>distrito</label>
+				<input type="text" id="distrito" name="distrito"></input>
 			</div>
 			<div class="field">
-				<label>Costo delivery</label>
-				<input type="text" id="delivery" name="delivery" value="0"></input>
-			</div>
+				<label>referencia</label>
+				<input type="text" name="referencia" id="referencia"></input>
+			</div>			
 		</div>
 		<div class="two fields">
 			<div class='field'>
 				<div id='map'></div>
 			</div>
 			<div class="field">
-				<label>Metodo de pago:</label>
+				<label>costo delivery</label>
+				<input type="text" id="delivery" name="delivery" value="0"></input>
+				<label>método de pago:</label>
 				<select id="tipo-pago" name="tipo-pago">
 					<option>-- Seleccione metodo de pago --</option>
 					<option value="efectivo" selected>Efectivo</option>
 					<option value="visa">Visa</option>
 				</select>
-				<label>Monto a cobrar</label>
+				<label>monto a cobrar</label>
 				<input type="text" id="mcobrar" value="0" name="mcobrar"></input>
-				<label>Nombre Cliente</label>
+				<label>id del Cliente</label>
 				<input type="text" id="nameClient" name="nameClient"></input>
 				<button class="ui button btn-submit" type="submit" id="enviar">Realizar Pedido</button>
 			</div>
@@ -126,6 +129,7 @@
 						<tr ng-repeat="carta in productos">
 							<td class="cent">
 								<input type="checkbox" name="example" id="{{$index}}"/>
+								<input type="hidden" id="id{{$index}}" value="{{carta.id}}"></input>
 							</td>
 							<td>
 								<label>{{ carta.name }}</label>

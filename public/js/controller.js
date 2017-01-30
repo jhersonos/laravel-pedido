@@ -62,18 +62,21 @@ app.controller("pedidoCtrl", function($scope,$http) {
 		},addProduct:function(){
 			var total = 0;			
 			$("input:checked").each(function(i, elem){
-              var item = "#item"+this.id;//id for items list
-              $(item).removeClass('lnone');//delete none
-              // $(item).addClass('item show');//add show
-              var element = "#prex"+this.id;//price id for bucle
-              $(element).removeClass('pnone')
-			  $(element).addClass('pshow')
-			  var p = "#p"+this.id;
-			  var getp = parseFloat($(p).val());
-			  total = parseFloat(total)+getp;          
+						var idp = $("#id"+this.id).val();	//get id product to database
+						$("#pid"+this.id).val(idp);			//send id product to list
+	              var item = "#item"+this.id;		//id for items list
+	              $(item).removeClass('lnone');		//delete none
+	              var element = "#prex"+this.id;	//price id for bucle
+	              $(element).removeClass('pnone');
+					  $(element).addClass('pshow');
+					  var p = "#p"+this.id;
+					  var getp = parseFloat($(p).val());
+					  total = parseFloat(total)+getp;          
           	});
 			$('#total').val(total)
 			$("#monto-cobrar").val(total);
+			$('#pro').modal('hide'); 
+
 		}
 	}
 	$scope.getRestaurantes.company();

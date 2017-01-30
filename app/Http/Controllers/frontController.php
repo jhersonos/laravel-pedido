@@ -28,9 +28,10 @@ class frontController extends Controller
     		]);
     }
     public function create(Request $request){
-        // $order = DB::table('users')->insert();
-        $order = new Order;
-        $order->products_id     = $request->products;//Input::get('restaurant-list');
+        $p = array();
+        $p =  $request->products;
+
+        $order = new Order;      
         $order->client          = $request->client_id;
         $order->deliveryAmount  = $request->deliveryAmount;
         $order->orderAmount     = $request->orderAmount;
@@ -38,22 +39,30 @@ class frontController extends Controller
         $order->address         = $request->address;
         $order->references      = $request->references;
         $order->headquarter     = $request->headquarter;
-        $order->rider_id        = $request->rider;//Input::get('');
+        $order->rider_id        = $request->rider;              
         $order->orderComment    = $request->orderComment;
-        $order->district        = $request->district;        // echo $order;
-        if($order->save()) {
-            $id = $order->id;
-            $this->order_product($id);
-        }
+        $order->district        = $request->district;    
+
+        try {
+             if($order->save()) {
+                $id = $order->id;
+                $this->order_product($id,$p);
+            }  
+               } catch (Exception $e) {
+                    echo $e;      
+               }       
         // $order->save();
         
     }
 
-    public function order_product($id){
-
-        DB::table('order_product')->insert(
-            array('product_id' => 2, 'order_id' => $id)
-        );
-
+    public function order_product($id,$p){
+        $i = 0;
+            foreach ($p as $pro) {
+                $pquery[] = [
+                    'product_id'    => $pro,
+                    'order_id'      => $id
+                ];
+            }
+        DB::table('order_product')->insert($pquery);
     }
 }
