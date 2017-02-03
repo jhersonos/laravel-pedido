@@ -58,14 +58,17 @@
 			</div>
 			<div class="field">
 				<div class="ui celled ordered list" id="list-product">
-					<div ng-repeat="lista in listap" class="item padd lnone" id="item{{ $index }}">
+					<div ng-repeat="lista in listap" class="item padd none" id="item{{ $index }}">
 						<div class="content">
 							<div class="header lstyle">
 								{{	lista.name }}
 								<input type="hidden" id="pid{{	$index	}}"></input>
+								<div class="pc">
+									<input type="hidden" value="{{ lista.price }}"></input>
+								</div>
 							</div>
 							<div class="rf">
-								<strong class="close">X</strong>
+								<strong class="close" id="{{ $index }}" ng-click="getRestaurantes.remove($event)">X</strong>
 							</div>
 							<span class="rf">
 								{{	lista.price }}	
